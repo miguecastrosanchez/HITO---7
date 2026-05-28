@@ -50,7 +50,7 @@ function Pizza() {
             
             <div className="col-md-5">
               <img
-                src={pizza.img}
+                src={`/pizzas/${pizza.id}.png`}
                 className="img-fluid h-100 w-100 object-fit-cover"
                 alt={pizza.name}
               />

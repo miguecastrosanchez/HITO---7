@@ -50,7 +50,7 @@ function Pizzas() {
               <div className="col-md-4 mb-4 d-flex" key={pizza.id}>
                 <div className="card card-pizza w-100 h-100">
                   <img
-                    src={pizza.img}
+                    src={`/pizzas/${pizza.id}.png`}
                     className="card-img-top imagen-pizza"
                     alt={pizza.name}
                   />

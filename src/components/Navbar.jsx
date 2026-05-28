@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext.jsx';
@@ -10,7 +10,7 @@ import { CartContext } from '../context/CartContext.jsx';
 function Navbar(){
 
 let precio = 25000;
-let logeado = false;
+
 
 const { user, setUser } = useContext(GlobalContext);
 const { total } = useContext(CartContext);
@@ -38,9 +38,9 @@ console.log(user);
         <li className="nav-item">
           
          
-          <Link to="/">
-                <Button variant="dark"> 🍕 Home</Button>
-             </Link>
+          <NavLink to="/" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
+            🍕 Home
+          </NavLink>
           
         </li>
 
@@ -49,9 +49,10 @@ console.log(user);
         </li> 
         :  <li className="nav-item">
 
-             <Link to="/Register">
-                <Button variant="dark">🔐Register</Button>
-             </Link>
+             
+        <NavLink to="/Register" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
+          🔐Register
+        </NavLink>
             
         </li>}
 
@@ -60,9 +61,11 @@ console.log(user);
         </li> 
         :  <li className="nav-item">
          
-         <Link to="/Login">
-         <Button variant="dark">🔐Login</Button>
-        </Link>
+
+         <NavLink to="/Login" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
+          🔐Login
+        </NavLink>
+        
         
         
         </li>}
@@ -76,12 +79,10 @@ console.log(user);
 
     <div className="Carrito">
         
-        <Link to="/Cart" className="nav-link" variant="dark">
-        
-        <Button variant="dark">🛒 Total: ${total.toLocaleString()} 
-        </Button>
-
-        </Link>
+       
+         <NavLink to="/Cart" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
+          🛒 Total: ${total.toLocaleString()}
+        </NavLink>
          </div>
   </div>
 </nav>

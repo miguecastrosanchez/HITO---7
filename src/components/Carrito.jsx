@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext.jsx";
 
 function Carrito() {
   
   const { carrito, agregarPizza, quitarPizza, total } = useContext(CartContext);
   console.log("CARRITO ACTUAL:", carrito);
+
+  const{login, setLogin} = useContext(UserContext);
+
 
   return (
     <>
@@ -77,7 +81,9 @@ function Carrito() {
               </div>
 
               <div className="text-end">
-                <button className="btn btn-dark">Pagar</button>
+                {
+                  login ? <button className="btn btn-dark">Pagar</button> : <p className="text-muted">Inicia sesión para proceder al pago.</p>
+                }
               </div>
             </div>
           </div>

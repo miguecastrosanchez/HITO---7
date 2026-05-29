@@ -6,15 +6,27 @@ import { GlobalContext } from '../context/GlobalContext.jsx';
 
 import { CartContext } from '../context/CartContext.jsx';
 
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext.jsx';
+
 
 function Navbar(){
 
 let precio = 25000;
 
+const navigate = useNavigate()
 
 const { user, setUser } = useContext(GlobalContext);
 const { total } = useContext(CartContext);
+const { login, setLogin } = useContext(UserContext);
 
+const logOut = function(){
+    setUser({})
+    setLogin(false)
+    alert("Sesión cerrada correctamente")
+    navigate("/Login")
+}
+  
 console.log(user);
     return(
         <>
@@ -22,9 +34,9 @@ console.log(user);
   <div className="container-fluid">
     
     
-     <Link to="/">
-            <a className="navbar-brand" href="#">Pizzeria Mamma Mia!</a>
-     </Link>
+     <Link to="/" className="navbar-brand text-white text-decoration-none fw-bold">
+  Pizzeria Mamma Mia!
+    </Link>
    
 
 
@@ -44,7 +56,7 @@ console.log(user);
           
         </li>
 
-        {user !== null ? <li className="nav-item">
+        {login ? <li className="nav-item">
          <Button variant="dark">🔒Profile</Button>
         </li> 
         :  <li className="nav-item">
@@ -56,8 +68,12 @@ console.log(user);
             
         </li>}
 
-        {user !== null ? <li className="nav-item">
-         <Button variant="dark" onClick={()=> setUser(null)}>🔒Logout</Button>
+        {login ? <li className="nav-item">
+         
+         {/* <NavLink to="/Login" variant="dark" onClick={()=> logOut()}>🔒Logout</NavLink> */}
+         <Button variant="dark" className="me-2" onClick={()=> logOut()}> 🔓 Logout </Button>
+        
+        
         </li> 
         :  <li className="nav-item">
          
@@ -66,24 +82,27 @@ console.log(user);
           🔐Login
         </NavLink>
         
-        
-        
         </li>}
 
       </ul>
     </div>
     
     <span className="text-white fw-bold ms-3">
-    {user !== null ? user.email : "No logeado"}
+    {login ? user.email  : "No logeado"}
     </span>
 
-    <div className="Carrito">
-        
-       
-         <NavLink to="/Cart" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
-          🛒 Total: ${total.toLocaleString()}
-        </NavLink>
-         </div>
+    
+  <div className="Carrito">
+    <NavLink
+      to="/Cart"
+      className={({ isActive }) =>
+        isActive ? "btn btn-light me-2" : "btn btn-dark me-2"
+      }
+    >
+      🛒 Total: ${total.toLocaleString("es-CL")}
+    </NavLink>
+  </div>
+
   </div>
 </nav>
         </>

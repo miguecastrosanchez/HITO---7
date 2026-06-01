@@ -56,12 +56,21 @@ console.log(user);
           
         </li>
 
-        {login ? <li className="nav-item">
+        {/* {login ? <li className="nav-item">
          <Button variant="dark">🔒Profile</Button>
+        </li> 
+        :  <li className="nav-item"> */}
+
+         {login ? <li className="nav-item">
+          <NavLink to="/Profile" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
+            🔒Profile
+          </NavLink>
         </li> 
         :  <li className="nav-item">
 
-             
+        
+
+        
         <NavLink to="/Register" className={({ isActive }) => isActive ? "btn btn-light me-2" : "btn btn-dark me-2"}>
           🔐Register
         </NavLink>
